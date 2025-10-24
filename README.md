@@ -17,15 +17,21 @@ La idea fue crear algo real: una app que permita **anotar y agrupar gastos perso
 
 ## 🧩 Tecnologías que usé
 
-- ⚛️ **React** – para la interfaz  
-- 🟦 **TypeScript** – para tener todo bien tipado  
-- 🧠 **Context API** – para compartir estado entre componentes  
-- 🎨 **TailwindCSS** – para los estilos  
-- 💾 **LocalStorage** – para guardar los datos localmente  
+- ⚛️ **React** – para la interfaz
+- 🟦 **TypeScript** – para tener todo bien tipado
+- 🧠 **Context API** – para compartir estado entre componentes
+- 🎨 **TailwindCSS** – para los estilos
+- 💾 **LocalStorage** – para guardar los datos localmente
 - ⚡ **Vite** – para desarrollar rápido y sin esperas
 - 🤖 🧩 Este proyecto fue desarrollado con mi propio esfuerzo, con apoyo de documentación oficial y asistencia técnica de ChatGPT para resolver dudas puntuales y mejorar la estructura del código.
 
+---
+
+## 🌐 Demo online
+
+Puedes probar la app aquí 👉 [gastos-personales-react.vercel.app](https://gastos-personales-react.vercel.app)
 
 ---
 
-## 📂 Estructura básica
+💡 Proyecto creado con **React + TypeScript + Tailwind + Context API**,  
+desarrollado por **Sandy Andrial** como parte de su formación profesional.
