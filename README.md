@@ -1,6 +1,6 @@
 # 💰 App de Gastos Personales
 
-Hola 👋 soy **LU**, y esta es una pequeña aplicación que hice para practicar **React con TypeScript (todavía estoy en fase de aprendizaje)**.  
+Hola 👋 soy **Sandy**, y esta es una pequeña aplicación que hice para practicar **React con TypeScript (todavía estoy en fase de aprendizaje)**.  
 La idea fue crear algo real: una app que permita **anotar y agrupar gastos personales**, pero también entender bien cómo funcionan **Context, useState, useEffect y el manejo de estado global**.
 
 ---
