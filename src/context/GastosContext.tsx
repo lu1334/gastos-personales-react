@@ -5,19 +5,12 @@ import React, {
   type ReactNode,
   useEffect,
 } from "react";
-import {
-  type Temporal,
-  type EstadoGasto,
-  type Gastos,
-  type GastosAccions,
-} from "../types/types";
-
-
+import {type  Temporal, type EstadoGasto, type Gastos, type GastosAccions } from "../types/types";
 
 const gastosContext = createContext<GastosAccions | undefined>(undefined);
-export function GastosProvider({ children }: { children: ReactNode }) {
 
-  const [temporal, setTemporal] = useState<Temporal>("");
+export function GastosProvider({ children }: { children: ReactNode }) {
+  const [temporal,setTemporal]= useState<Temporal>("categoria")
   const [nombreGastos, setNombreGastos] = useState<string>("");
   const [cantidadGastos, setCantidadGastos] = useState<string>("");
   const [categoriaGastos, setCategoriaGastos] = useState<string>("");
@@ -26,68 +19,34 @@ export function GastosProvider({ children }: { children: ReactNode }) {
     const datosGuardados = localStorage.getItem("listaGastos");
     return datosGuardados ? JSON.parse(datosGuardados) : [];
   });
-  const handlerSeleccionarSegun = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTemporal(e.target.value as Temporal);
-  };
-  const handlerOnchangeNombre = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlerSeleccionarSegun = (e: React.ChangeEvent<HTMLSelectElement>) => setTemporal(e.target.value as Temporal)
+  const handlerOnchangeNombre = (e: React.ChangeEvent<HTMLInputElement>) =>
     setNombreGastos(e.target.value);
-  };
-  const handlerOnchangeCantidad = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const cantidad = e.target.value
-    setCantidadGastos(cantidad);
-    if (Number(cantidad) < 0) {
-    alert("La cantidad no puede ser negativa");
-    return;
-  }
-    
-  };
-  const handlerOnchangeCategoria = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handlerOnchangeCantidad = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setCantidadGastos(e.target.value);
+  const handlerOnchangeCategoria = (e: React.ChangeEvent<HTMLSelectElement>) =>
     setCategoriaGastos(e.target.value);
-  };
-  const handlerOnchangeEstadoActualizado = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    id: number
-  ) => {
-    const nuevaLista = listaGastos.map((gasto) => {
-      if (gasto.id === id) {
-        return { ...gasto, estado: e.target.value as EstadoGasto };
-      }
-      return gasto;
-    });
-    setListaGastos(nuevaLista);
-  };
+  const handlerOnchangeEstadoActualizado = (e: React.ChangeEvent<HTMLSelectElement>,id:number) =>{
+    const nuevaLista = listaGastos.map((gasto)=>(
+      gasto.id === id?{...gasto,estado:e.target.value as EstadoGasto}:gasto
+    ))
+    setListaGastos(nuevaLista)
+  }
   const handlerEliminar = (id: number) => {
-    setListaGastos((prev) => {
-      return prev.filter((g) => {
-        return g.id !== id;
-      });
-    });
+    setListaGastos((prev) => prev.filter((g) => g.id !== id));
   };
-  const handlerToggleEstado = (id: number) => {
-    setListaGastos((prev) => {
-      return prev.map((gasto) => {
-        if (gasto.id === id) {
-          return { ...gasto, estado: estadoGastos };
-        }
-        return gasto;
-      });
-    });
-  };
+  const handlerToggleEstado =(id:number)=>{
+    setListaGastos(prev=>prev.map((gasto)=>(
+      gasto.id === id? {...gasto,estado:estadoGastos}:gasto
+    )))
+  }
   const handlerAgregar = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const nombreEncontrado = listaGastos.some(
-      (gasto) => gasto.nombre === nombreGastos
-    );
-    if (nombreEncontrado) {
-      alert(
-        "El nombre que intenta ingresar ya se encuentra en la base de datos"
-      );
-      return;
-    }
-    if (!nombreGastos || !cantidadGastos || !categoriaGastos || !estadoGastos)
-      return; 
+    if (!nombreGastos || !cantidadGastos || !categoriaGastos || !estadoGastos) return;
+    setNombreGastos("");
+    setCantidadGastos("");
+    setCategoriaGastos("");
+
     setListaGastos((prev) => [
       ...prev,
       {
@@ -95,7 +54,7 @@ export function GastosProvider({ children }: { children: ReactNode }) {
         nombre: nombreGastos,
         cantidad: cantidadGastos,
         categoria: categoriaGastos,
-        estado: estadoGastos,
+        estado:estadoGastos
       },
     ]);
   };
@@ -125,7 +84,7 @@ export function GastosProvider({ children }: { children: ReactNode }) {
         handlerToggleEstado,
         handlerAgregar,
         handlerEliminar,
-        handlerSeleccionarSegun,
+        handlerSeleccionarSegun
       }}
     >
       {children}
